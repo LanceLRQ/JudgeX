@@ -3,6 +3,7 @@ module backend
 go 1.14
 
 require (
+	github.com/Shopify/sarama v1.26.4 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/go-redis/cache/v8 v8.0.0-beta.11 // indirect
 	github.com/go-redis/redis/v8 v8.0.0-beta.4 // indirect
