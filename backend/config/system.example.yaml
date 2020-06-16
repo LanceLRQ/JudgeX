@@ -3,3 +3,27 @@ work_root:
 server:
   listen: 0.0.0.0
   port: 9527
+storage:
+  problems:
+  sessions:
+system:
+  network_timeout: 5
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: judgex
+  passowrd: 12345678
+  db_name: judgex
+  charset: uft8mb4
+rabbitmq:
+  host: "127.0.0.1"
+  port: 5672
+  username: judgex
+  password: 12345678
+  virtual_host: judgex
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: "12345678"
+  db_judgex: 12
+  db_statistic: 13
