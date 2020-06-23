@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 // 用户账户表表
@@ -22,8 +21,7 @@ type Account struct {
 
 // 登录日志表
 type LoginLog struct {
-	ID        		uint `gorm:"primary_key"`				// 主键
-	CreatedAt 		time.Time								// 创建时间
+	gorm.Model
 	IpAddress 		string									// IP地址
 	LoginAccount 	Account									// 登录用户
 	UserAgent 		string 									// UA信息
@@ -32,7 +30,7 @@ type LoginLog struct {
 // WeJudge SSO服务绑定信息表
 // WeJudge SSO service binding records.
 type WeJudgeSSOBinding struct {
-	ID        			uint `gorm:"primary_key"`			// 主键
+	gorm.Model
 	LoginAccount 		Account								// 登录用户
 	WeJudgeAccountId	string								// WeJudge 账号Id
 }
