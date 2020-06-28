@@ -1,9 +1,11 @@
 package models
 
+import "backend/enums"
+
 // 评测设置（非数据库表）
 // map类型的表示需要针对不同的语言进行设置，key为uint，是代码语言的标识
 type JudgeConfig struct {
-	Version string
+	Version string							`json:"version"`					// 版本号(兼容数据结构，基本没用)
 	TimeLimit map[uint]uint					`json:"time_limit"`					// 时间限制
 	MemLimit map[uint]uint					`json:"mem_limit"`					// 内存空间限制
 	ProblemType int							`json:"problem_type"`				// 题目类型
@@ -12,7 +14,7 @@ type JudgeConfig struct {
 	DemoCases map[uint]JudgeDemoCase 		`json:"demo_cases"`					// 代码填空样例数据
 	AnswerCases map[uint]string				`json:"answer_cases"`				// 答案样例代码
 
-	TestLib bool 							`json:"TestLib"`					// testlib设置
+	TestLib TestlibOptions 					`json:"TestLib"`					// testlib设置
 	SpecialJudge uint 						`json:"special_judge"`				// 特殊评测模式
 	SpecialJudgeConfig SpecialJudgeConfig 	`json:"special_judge_config"`		// 特殊评测设置信息
 
@@ -101,4 +103,43 @@ type TestlibValidatorCase struct {
 	ExpectedVerdict bool 				`json:"expected_verdict"`		// 期望结果
 	ValidatorVerdict bool 				`json:"validator_verdict"`		// 检查结果
 	ValidatorComment bool 				`json:"validator_comment"`		// 检查结果备注（输出信息）
+}
+
+/* Object Generators */
+
+func NewJudgeConfig() JudgeConfig {
+	ret := JudgeConfig{}
+	ret.Version = "1.0"
+	ret.ProblemType = enums.ProblemTypeCode
+	ret.SpecialJudge = enums.SpecialJudgeDisabled
+	ret.TestLib = NewTestlibOptions()
+	return ret
+}
+func NewJudgeTestCase() JudgeTestCase {
+	ret := JudgeTestCase{}
+	return ret
+}
+func NewJudgeDemoCase() JudgeDemoCase {
+	ret := JudgeDemoCase{}
+	return ret
+}
+func NewJudgeFileInfo() JudgeFileInfo {
+	ret := JudgeFileInfo{}
+	return ret
+}
+func NewSpecialJudgeConfig() SpecialJudgeConfig {
+	ret := SpecialJudgeConfig{}
+	return ret
+}
+func NewSpecialJudgeCheckerCases() SpecialJudgeCheckerCases {
+	ret := SpecialJudgeCheckerCases{}
+	return ret
+}
+func NewTestlibOptions() TestlibOptions {
+	ret := TestlibOptions{}
+	return ret
+}
+func NewTestlibValidatorCase() TestlibValidatorCase {
+	ret := TestlibValidatorCase{}
+	return ret
 }

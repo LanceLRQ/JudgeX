@@ -20,3 +20,10 @@ const (
 	TestLibTypeInteractor   = 3
 	TestLibTypeValidator    = 4
 )
+
+const (
+	SpecialJudgeDisabled 		= 0		// 停用
+	SpecialJudgeCheckerMode 	= 1		// 检查模式(WeJudge版本)
+	SpecialJudgeInteractiveMode = 2		// 交互模式(WeJudge版本)
+	SpecialJudgeTestlibMode   	= 3		// Testlib模式
+)
