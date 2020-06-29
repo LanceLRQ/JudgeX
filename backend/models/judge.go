@@ -59,8 +59,8 @@ type JudgeFileInfo struct {
 	FileSize string 					`json:"file_size"`				// 文件大小
 	IsCode bool 						`json:"is_code"`				// 是否是代码文件
 	Language uint 						`json:"language"`				// 代码文件的语言
-	TestLibType uint 					`json:"testlib_type"`			// testlib功能类型
-	TestLibVersion	string 				`json:"testlib_version"`		// testlib版本
+	TestlibType uint 					`json:"testlib_type"`			// testlib功能类型
+	TestlibVersion	string 				`json:"testlib_version"`		// testlib版本
 	CompileTarget	string 				`json:"compile_target"`			// 编译后的目标文件名称
 	CreateTime uint						`json:"create_time"`			// 创建时间
 	UpdateTime uint						`json:"update_time"`			// 修改时间
@@ -75,7 +75,7 @@ type SpecialJudgeConfig struct {
 	TimeLimit uint						`json:"time_limit"`				// 时间限制（ms)
 	MemLimit uint						`json:"mem_limit"`				// 内存空间限制（kb）
 	// 验证样例（基于Testlib）
-	CheckerCases SpecialJudgeCheckerCases	`json:"checker_cases"`
+	CheckerCases []SpecialJudgeCheckerCases	`json:"checker_cases"`
 }
 
 type SpecialJudgeCheckerCases struct {
@@ -83,8 +83,8 @@ type SpecialJudgeCheckerCases struct {
 	Output string						`json:"output"` 				// 输出数据（限制1k内)
 	Answer string						`json:"answer"` 				// 答案数据（限制1k内)
 	Verdict bool 						`json:"verdict"`				// 是否执行过检查
-	ExpectedVerdict bool 				`json:"expected_verdict"`		// 期望结果
-	CheckerVerdict bool 				`json:"checker_verdict"`		// 检查结果
+	ExpectedVerdict int 				`json:"expected_verdict"`		// 期望结果
+	CheckerVerdict int 					`json:"checker_verdict"`		// 检查结果
 	CheckerComment bool 				`json:"checker_comment"`		// 检查结果备注（输出信息）
 }
 
@@ -117,6 +117,8 @@ func NewJudgeConfig() JudgeConfig {
 }
 func NewJudgeTestCase() JudgeTestCase {
 	ret := JudgeTestCase{}
+	ret.Available = true
+	ret.ValidatorVerdict = true
 	return ret
 }
 func NewJudgeDemoCase() JudgeDemoCase {
@@ -125,18 +127,28 @@ func NewJudgeDemoCase() JudgeDemoCase {
 }
 func NewJudgeFileInfo() JudgeFileInfo {
 	ret := JudgeFileInfo{}
+	ret.Language = enums.JudgeLangGCPP
+	ret.TestlibType = enums.TestLibTypeNone
+	ret.TestlibVersion = "latest"
 	return ret
 }
 func NewSpecialJudgeConfig() SpecialJudgeConfig {
 	ret := SpecialJudgeConfig{}
+	ret.Language = enums.JudgeLangGCPP
+	ret.RedirectSTD = true
+	ret.TimeLimit = 1000
+	ret.MemLimit = 32768
 	return ret
 }
 func NewSpecialJudgeCheckerCases() SpecialJudgeCheckerCases {
 	ret := SpecialJudgeCheckerCases{}
+	ret.CheckerVerdict = enums.JudgeFlagAC
+	ret.ExpectedVerdict = enums.JudgeFlagAC
 	return ret
 }
 func NewTestlibOptions() TestlibOptions {
 	ret := TestlibOptions{}
+	ret.Language = enums.JudgeLangGCPP
 	return ret
 }
 func NewTestlibValidatorCase() TestlibValidatorCase {
