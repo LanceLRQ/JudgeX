@@ -1,4 +1,6 @@
-package models
+package orms
+
+import "github.com/jinzhu/gorm"
 
 /**
 	系统级别的设置
@@ -6,6 +8,7 @@ package models
 
 // 客户端表
 type ApplicationClient struct {
+	gorm.Model
 	AppKey string 	`gorm:"type:varchar(64);unique_index"`	// 应用标识 (基于snowflake的Base64模式输出)
 	AppSecret string `gorm:"type:varchar(128)"`				// 应用密钥
 

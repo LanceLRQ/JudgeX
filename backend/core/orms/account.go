@@ -1,4 +1,4 @@
-package models
+package orms
 
 import (
 	"github.com/jinzhu/gorm"
@@ -7,7 +7,7 @@ import (
 // 用户账户表表
 type Account struct {
 	gorm.Model
-	UserName 			string	`gorm:"unique;not null"`	// 登录名称
+	UserName 			string	`gorm:"type:varchar(64);unique;not null"`	// 登录名称
 	PassWord 			string								// 登录密码
 	Email 				string								// 登录邮箱
 	EmailValidated 		bool								// 邮箱是否验证

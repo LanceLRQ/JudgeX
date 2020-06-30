@@ -66,6 +66,7 @@ type JudgeFileInfo struct {
 	UpdateTime uint						`json:"update_time"`			// 修改时间
 }
 
+//  特殊评测设置
 type SpecialJudgeConfig struct {
 	Program string						`json:"program"` 				// 特殊评测目标程序位置（相对）
 	CodeContent string					`json:"code_content"` 			// 特判程序源代码
@@ -78,6 +79,7 @@ type SpecialJudgeConfig struct {
 	CheckerCases []SpecialJudgeCheckerCases	`json:"checker_cases"`
 }
 
+//  特殊评测检查样例
 type SpecialJudgeCheckerCases struct {
 	Input string						`json:"input"` 					// 输入数据（限制1k内)
 	Output string						`json:"output"` 				// 输出数据（限制1k内)
@@ -88,7 +90,7 @@ type SpecialJudgeCheckerCases struct {
 	CheckerComment bool 				`json:"checker_comment"`		// 检查结果备注（输出信息）
 }
 
-
+// Testlib 配置
 type TestlibOptions struct {
 	Version string						`json:"version"`				// 声明它要用哪个版本的Testlib
 	Language uint 						`json:"language"`				// 编译语言（默认是CPP，未来支持Java，其他不支持）
@@ -97,6 +99,7 @@ type TestlibOptions struct {
 	// 未来这边可以加入对拍(stress)功能
 }
 
+// Testlib Validator 样例
 type TestlibValidatorCase struct {
 	Input string						`json:"input"`					// 输入数据（建议限制1k内)
 	Verdict bool 						`json:"verdict"`				// 是否执行过检查
