@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:10.5
+    container_name: judgex-mariadb-service
+    volumes:
+      - ./storages/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: judgex-phpmyadmin
+    depends_on:
+      - mariadb
+    links:
+      - mariadb:db
+    restart: always
+
+  redis:
+    build: ./redis
+    container_name: judgex-redis-service
+    volumes:
+      - ./storages/redis:/data
+    ports:
+      - "6379:6379"
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: judgex-rabbitmq-service
+    hostname: judgex-rabbitmq
+    volumes:
+      - ./storages/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@judgex-rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=12345678
+    restart: always

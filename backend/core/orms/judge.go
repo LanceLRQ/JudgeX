@@ -26,6 +26,7 @@ type JudgeRecord struct {
 	JudgeTaskId		uint64 											// 评测任务ID （用于和判题模块交互）
 	JudgeResult 	string 			`gorm:"type:longtext"`			// 评测结果信息（JSON）
 
+	TargetNode		uint											// 优先使用的节点
 	CrossCheckGroupId	string 		`gorm:"type:varchar(128);index"`		// 查重分组ID （同一分组的提交将被执行查重，不填则不执行查重）
 }
 
