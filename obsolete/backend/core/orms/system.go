@@ -1,7 +1,7 @@
 package orms
 
 import (
-	"github.com/jinzhu/gorm"
+    "github.com/jinzhu/gorm"
 	"time"
 )
 

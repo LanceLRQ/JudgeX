@@ -15,6 +15,6 @@
 # vendor/
 
 .idea
-backend/backend
-backend/config/system.yaml
+obsolete/backend/backend
+obsolete/backend/config/system.yaml
 .DS_Store

@@ -7,11 +7,11 @@ type JudgeRecord struct {
 	gorm.Model
 
 	// 提交者
-	Author   			Account 	`gorm:"foreignkey:ID;association_foreignkey:AuthorId"`
+	Author Account `gorm:"foreignkey:ID;association_foreignkey:AuthorId"`
 	// 题提交者Id
 	AuthorId 			uint
 	// 题目关联
-	Problem   			Problem 	`gorm:"foreignkey:ID;association_foreignkey:ProblemId"`
+	Problem Problem `gorm:"foreignkey:ID;association_foreignkey:ProblemId"`
 	// 题目关联Id
 	ProblemId 			uint
 

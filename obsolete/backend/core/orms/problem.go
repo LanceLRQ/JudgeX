@@ -10,7 +10,7 @@ type Problem struct {
 	// 题目标题
 	Title    			string
 	// 题目作者
-	Author   			Account 	`gorm:"foreignkey:ID;association_foreignkey:AuthorId"`
+	Author Account `gorm:"foreignkey:ID;association_foreignkey:AuthorId"`
 	// 题目作者Id
 	AuthorId 			uint
 	Type     			uint    															// 题目类型
