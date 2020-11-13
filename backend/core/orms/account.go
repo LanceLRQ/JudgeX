@@ -7,30 +7,43 @@ import (
 // 用户账户表表
 type Account struct {
 	gorm.Model
-	UserName 			string	`gorm:"type:varchar(64);unique;not null"`	// 登录名称
-	PassWord 			string								// 登录密码
-	Email 				string								// 登录邮箱
-	EmailValidated 		bool								// 邮箱是否验证
-	Locked 				bool								// 账号锁定
-
-	IsAdmin 			bool								// 系统管理员身份
-	PermCreateProblem 	bool								// 创建题目
-	PermManageProblems 	bool								// 管理非自己创建的题目
-	PermProblemDatas 	bool 								// 查看非自己创建题目的数据
+	// 登录名称
+	UserName 			string	`gorm:"type:varchar(64);unique;not null"`
+	// 登录密码
+	PassWord 			string
+	// 登录邮箱
+	Email 				string
+	// 邮箱是否验证
+	EmailValidated 		bool
+	// 账号锁定
+	Locked 				bool
+	// 系统管理员身份
+	IsAdmin 			bool
+	// 创建题目
+	PermCreateProblem 	bool
+	// 管理非自己创建的题目
+	PermManageProblems 	bool
+	// 查看非自己创建题目的数据
+	PermProblemDatas 	bool
 }
 
 // 登录日志表
 type LoginLog struct {
 	gorm.Model
-	IpAddress 		string									// IP地址
-	LoginAccount 	Account									// 登录用户
-	UserAgent 		string 									// UA信息
+	// IP地址
+	IpAddress 			string
+	// 登录用户
+	LoginAccount 		Account
+	// UA信息
+	UserAgent 			string
 }
 
 // WeJudge SSO服务绑定信息表
 // WeJudge SSO service binding records.
 type WeJudgeSSOBinding struct {
 	gorm.Model
-	LoginAccount 		Account								// 登录用户
-	WeJudgeAccountId	string								// WeJudge 账号Id
+	// 登录用户
+	LoginAccount 		Account
+	// WeJudge 账号Id
+	WeJudgeAccountId	string
 }

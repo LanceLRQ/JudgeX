@@ -7,9 +7,12 @@ import (
 // 题目数据
 type Problem struct {
 	gorm.Model
-	Title    			string  															// 题目标题
-	Author   			Account 	`gorm:"foreignkey:ID;association_foreignkey:AuthorId"` // 题目作者
-	AuthorId 			uint    															// 题目作者Id
+	// 题目标题
+	Title    			string
+	// 题目作者
+	Author   			Account 	`gorm:"foreignkey:ID;association_foreignkey:AuthorId"`
+	// 题目作者Id
+	AuthorId 			uint
 	Type     			uint    															// 题目类型
 
 	Legend 				string 		`gorm:"type:longtext"`									// 题目正文描述
