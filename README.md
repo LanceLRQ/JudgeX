@@ -1,2 +1,2 @@
-# judgex
-JudgeX - 基于Linux的开源代码评测服务 | A linux-based code judging service
+# WeJudge Polygon
+WeJudge Polygon - 开源的算法题评测管理服务 | An open-source algorithm problems judgement & management service
