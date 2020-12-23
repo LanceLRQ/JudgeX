@@ -14,3 +14,6 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 .idea
+pkg/deer-common
+src/polygon/cmd
+!src/polygon/cmd/main.go
