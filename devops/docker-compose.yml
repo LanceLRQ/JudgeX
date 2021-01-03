@@ -1,0 +1,74 @@
+version: "2"
+
+services:
+
+  mariadb:
+      image: mariadb:10
+      container_name: wejudge-polygon-mysql
+      volumes:
+        - ./storages/mysql:/var/lib/mysql
+      ports:
+        - "13306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=12345678
+      restart: always
+
+  pma:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wejudge-polygon-phpmyadmin
+    depends_on:
+      - mariadb
+    links:
+      - mariadb:db
+    restart: always
+
+  redis:
+    image: redis:6
+    container_name: wejudge-polygon-redis
+    volumes:
+      - ./storages/redis:/data
+      - ./configs/redis.conf:/etc/redis/redis.conf
+    ports:
+      - "16379:6379"
+    command: redis-server /etc/redis/redis.conf
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: wejudge-polygon-rabbitmq
+    hostname: wejudge-rabbitmq
+    volumes:
+      - ./storages/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@wejudge-rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=12345678
+    restart: always
+
+  memcached:
+    image: memcached:latest
+    container_name: wejudge-polygon-memcached
+    hostname: wejuge-memcached
+    ports:
+      - "11211:11211"
+    command: memcached -m 256
+    restart: always
+
+  web:
+    image: nginx:latest
+    container_name: wejudge-polygon-webproxy
+    depends_on:
+      - pma
+      - rabbitmq
+    links:
+      - pma:pma
+      - rabbitmq:rabbitmq
+    ports: 
+      - "80:80"
+      # - "443:443"
+    volumes:
+      - ./configs/nginx/conf.d:/etc/nginx/conf.d
+      - ./configs/nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ../src/web:/web
+    restart: always
