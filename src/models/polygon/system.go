@@ -69,4 +69,6 @@ type JudgeMachineNode struct {
     CreateTime time.Time
     // 存活心跳时间
     ActiveTime time.Time
+    // 接受语言，不设置默认为all
+    Languages string `gorm:"type:text"`
 }
