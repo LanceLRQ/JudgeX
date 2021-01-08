@@ -15,3 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -
 
 # 下载go语言依赖并解压到 /usr/local/go
 RUN curl -L https://studygolang.com/dl/golang/go1.15.6.linux-amd64.tar.gz > /tmp/golang.tar.gz && tar xvzf /tmp/golang.tar.gz -C /usr/local
+
+COPY init.sh /init.sh
+
+RUN /init.sh
