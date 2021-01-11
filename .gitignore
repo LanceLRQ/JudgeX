@@ -19,4 +19,4 @@ pkg/deer-common
 src/polygon/cmd/*
 !src/polygon/cmd/*.go
 
-devops/storages
+env/storages

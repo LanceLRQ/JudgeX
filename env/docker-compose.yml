@@ -14,12 +14,16 @@ services:
       restart: always
 
   pma:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin:5
     container_name: wejudge-polygon-phpmyadmin
     depends_on:
       - mariadb
     links:
       - mariadb:db
+    ports:
+      - "18088:80"
+    environment:
+      - PMA_ABSOLUTE_URI=https://local.judge.fun/pma/
     restart: always
 
   redis:
@@ -56,7 +60,7 @@ services:
     restart: always
 
   web:
-    image: nginx:latest
+    image: nginx:1.15
     container_name: wejudge-polygon-webproxy
     depends_on:
       - pma
@@ -64,11 +68,12 @@ services:
     links:
       - pma:pma
       - rabbitmq:rabbitmq
-    ports: 
-      - "80:80"
-      # - "443:443"
+    ports:
+      # - "80:80"
+      - "443:443"
     volumes:
       - ./configs/nginx/conf.d:/etc/nginx/conf.d
       - ./configs/nginx/sites-enabled:/etc/nginx/sites-enabled
-      - ../src/web:/web
+      - ../src/web:/polygon/web
+      - ./certs:/polygon/web-certs
     restart: always
