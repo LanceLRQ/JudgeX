@@ -58,7 +58,7 @@ services:
     restart: always
 
   web:
-    image: nginx:1.15
+    image: nginx:latest
     container_name: wejudge-polygon-webproxy
     depends_on:
       - pma
