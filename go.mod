@@ -14,7 +14,7 @@ require (
 	google.golang.org/grpc v1.29.1
 	google.golang.org/protobuf v1.25.0 // indirect
 	gorm.io/driver/mysql v1.0.3 // indirect
-	gorm.io/gorm v1.20.8 // indirect
+	gorm.io/gorm v1.20.8
 )
 
 replace github.com/LanceLRQ/deer-common => ./pkg/deer-common

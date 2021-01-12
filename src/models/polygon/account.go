@@ -31,7 +31,9 @@ type LoginLog struct {
     // IP地址
     IpAddress string
     // 登录用户
-    LoginAccount Account
+    LoginAccount Account `gorm:"foreignkey:ID;association_foreignkey:LoginAccountId"`
+    // 登录用户Id
+    LoginAccountId uint `gorm:"index"`
     // UA信息
     UserAgent string
 }
@@ -41,7 +43,9 @@ type LoginLog struct {
 type WeJudgeSSOBinding struct {
     gorm.Model
     // 登录用户
-    LoginAccount Account
+    LoginAccount Account `gorm:"foreignkey:ID;association_foreignkey:LoginAccountId"`
+    // 登录用户Id
+    LoginAccountId uint `gorm:"index"`
     // WeJudge 账号Id
     WeJudgeAccountId string
 }

@@ -55,12 +55,13 @@ Online参数表示此节点是否在线(和评测节点是否存活无关，纯�
 节点由Watcher启动时自动注册到数据库中，如果ActiveTime早于当前时间3分钟以上，视作节点已经离线。
 */
 type JudgeMachineNode struct {
+    gorm.Model
     // 服务名
     Name string `gorm:"type:varchar(256)"`
     // 节点组
     Group JudgeMachineNodeGroup `gorm:"foreignkey:ID;association_foreignkey:GroupId"`
     // 节点组
-    GroupId int `gorm:"index"`
+    GroupId uint `gorm:"index"`
     // IP地址
     IPAddr string `gorm:"type:varchar(128)"`
     // 是否启用节点
